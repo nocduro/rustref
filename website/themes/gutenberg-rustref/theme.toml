@@ -1,0 +1,16 @@
+name = "rustref"
+description = "basic single page site"
+license = "MIT"
+homepage = ""
+min_version = "0.3.1"
+
+[extra]
+
+[author]
+name = "Mackenzie Hauck"
+homepage = "mackenzie.engineer"
+
+[original]
+author = "neverssl.com"
+homepage = "neverssl.com"
+

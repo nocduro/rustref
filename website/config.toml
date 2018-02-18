@@ -1,0 +1,14 @@
+# The URL the site will be built for
+base_url = "https://rustref.com"
+title = "rustref.com"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Gutenberg
+highlight_code = false
+theme = "gutenberg-rustref"
+
+[extra]
+# Put all your custom variables here

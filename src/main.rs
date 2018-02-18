@@ -6,7 +6,6 @@ extern crate toml;
 
 use std::fs::File;
 use std::env;
-use std::io;
 use std::io::prelude::*;
 use std::io::BufWriter;
 use std::path::Path;
@@ -39,24 +38,28 @@ fn main() {
             .and_then(|mut f| f.read_to_string(&mut input))
             .unwrap();
     } else {
-        io::stdin().read_to_string(&mut input).unwrap();
+        eprintln!("Incorrect number of args. Expected: rustref input_file.toml");
+        ::std::process::exit(1);
     }
 
     match toml::from_str::<Config>(&input) {
         Ok(ref mut toml) => generate_redirects(&mut toml.redirect, "_redirects"),
-        Err(err) => println!("Failed to parse redirects: {}", err),
+        Err(err) => {
+            eprintln!("Failed to parse input toml file: {}", err);
+            ::std::process::exit(1)
+        }
     }
 }
 
 fn generate_redirects<P: AsRef<Path>>(redirects: &mut [Redirect], output_path: P) {
-    // verify that we have no duplicate redirect rules    
+    // verify that we have no duplicate redirect rules
     redirects.sort();
     let dupes: Vec<_> = redirects
         .windows(2)
         .filter(|w| w[0] == w[1])
         .map(|w| w[0].short.clone())
         .collect();
-    
+
     if dupes.len() != 0 {
         eprintln!("Error: duplicate redirect rules for:");
         dupes.iter().for_each(|f| eprintln!("\t{}", f));
@@ -87,8 +90,35 @@ fn generate_redirects<P: AsRef<Path>>(redirects: &mut [Redirect], output_path: P
         .write_all(netlify_string.as_bytes())
         .expect("Unable to write data");
 
-    // generate the homepage
-    redirects.iter().for_each(|r| println!("{:?}", r));
+    // generate the homepage (this is kinda ugly...)
+
+    // read in `_index.md` from `./website/content/_index.md`
+    let mut markdown = String::new();
+    let markdown_path = "website/content/_index.md";
+    File::open(&markdown_path)
+        .and_then(|mut f| f.read_to_string(&mut markdown))
+        .expect("could not find _index.md");
+
+    // remove the previous redirects
+    let heading_str = "## Current redirects:";
+    let split_point = markdown
+        .find(&heading_str)
+        .expect("Could not find heading in markdown file");
+    markdown.split_off(split_point);
+    markdown.push_str(&heading_str);
+    markdown.push('\n');
+
+    // add in the redirects
+    redirects
+        .iter()
+        .for_each(|r| markdown.push_str(&format!("{0}.rustref.com → [{1}]({1})  \n", r.short, r.url)));
+    
+    // write modified markdown back to file
+    let markdown_file = File::create(&markdown_path).expect("Unable to create file");
+    let mut markdown_file = BufWriter::new(markdown_file);
+    markdown_file
+        .write_all(markdown.as_bytes())
+        .expect("Unable to write markdown file");
 }
 
 /// Verify that `url` is syntactically valid, and that the page is reachable
@@ -99,7 +129,6 @@ fn check_url(url: &str) -> Result<(), Error> {
         false => Err(Error::UrlStatusError(format!("{}: {}", url, resp.status()))),
     }
 }
-
 
 #[cfg(test)]
 mod tests {

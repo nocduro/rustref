@@ -1,7 +1,43 @@
 [[redirect]]
-short = "test"
-url = "http://nocduro.com/post/headless-processing3"
+short = "book"
+url = "https://doc.rust-lang.org/book/second-edition"
 
 [[redirect]]
-short = "help"
-url = "https://nocduro.ca/"
+short = "cargo"
+url = "https://doc.rust-lang.org/cargo/"
+
+[[redirect]]
+short = "cook"
+url = "https://rust-lang-nursery.github.io/rust-cookbook"
+
+[[redirect]]
+short = "cookbook"
+url = "https://rust-lang-nursery.github.io/rust-cookbook"
+
+[[redirect]]
+short = "ex"
+url = "https://rustbyexample.com/"
+
+[[redirect]]
+short = "example"
+url = "https://rustbyexample.com/"
+
+[[redirect]]
+short = "ffi"
+url = "http://jakegoulding.com/rust-ffi-omnibus"
+
+[[redirect]]
+short = "nomicon"
+url = "https://doc.rust-lang.org/nomicon"
+
+[[redirect]]
+short = "rfc"
+url = "https://rust-lang.github.io/rfcs"
+
+[[redirect]]
+short = "std"
+url = "https://doc.rust-lang.org/std"
+
+[[redirect]]
+short = "unstable"
+url = "https://doc.rust-lang.org/nightly/unstable-book"

@@ -23,4 +23,7 @@ script:
 
 after_success:
   - echo $PWD
+  - ls
+  - ls public
+  - netlifyctl assets -s $NETLIFY_SITE_ID -A $NETLIFY_TOKEN
   - netlifyctl deploy -s $NETLIFY_SITE_ID -A $NETLIFY_TOKEN -b public

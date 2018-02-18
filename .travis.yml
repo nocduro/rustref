@@ -17,4 +17,5 @@ script:
   - cargo test --verbose --release
   - cargo run redirects.toml --release
   - cd website
+  - mkdir static sass
   - gutenberg build

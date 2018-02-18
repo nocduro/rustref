@@ -19,3 +19,10 @@ script:
   - cd website
   - mkdir themes/gutenberg-rustref/static themes/gutenberg-rustref/sass
   - gutenberg build
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: public
+  target-branch: rendered

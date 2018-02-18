@@ -1,8 +1,6 @@
 language: rust
 rust:
   - stable
-  - beta
-  - nightly
 matrix:
   allow_failures:
     - rust: nightly
@@ -24,5 +22,5 @@ deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
-  local-dir: public
+  local-dir: website/public
   target-branch: rendered

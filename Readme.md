@@ -8,9 +8,9 @@ Website hosting/redirects provided by [Netlify](https://netlify.com)
 Website design ~~copied~~ _inspired_ by http://neverssl.com with the original CSS author being: Mark Webster https://gist.github.com/markcwebster/9bdf30655cdd5279bad13993ac87c85d
 
 ## Overview
-The Rust code is used to verify that the links function and to generate both the markdown for the website, and the `_redirects` file which is used by Netlify to do the redirects.
+The Rust code verifies that the links function and generates both the markdown for the website, and the `_redirects` file which is used by Netlify.
 
-The redirects are generated from the `redirects.toml` file.
+The redirects are generated from `redirects.toml`.
 
 ## Running
 Install gutenberg from: https://www.getgutenberg.io
@@ -28,6 +28,6 @@ gutenberg serve
 
 ## Contributing
 Modify `redirects.toml` with a new redirect (in alphabetic order) then make a pull request. 
-CI will check that the links are valid, and if approved will generate the website and modify the Netlify redirect rules.
+CI (not setup yet!) will check that the links are valid, and if approved will generate the website and modify the Netlify redirect rules.
 
 If there is an official site like this, let me know and I can redirect all traffic there. Also, if anyone from the Rust team would like rustref.com or rustreference.com domain names, contact me and we can work something out.

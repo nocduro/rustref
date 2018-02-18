@@ -6,6 +6,8 @@ template = "base.html"
 
 This (unofficial) site is meant as a shorthand for navigating to [Rust](https://www.rust-lang.org) documentation by use of subdomain redirects.
 
+Link broken, or want another redirect? Make a pull request [here](https://github.com/nocduro/rustref).
+
 ## Link to official documentation:
 [https://doc.rust-lang.org/](https://doc.rust-lang.org/)
 

@@ -20,6 +20,10 @@ script:
   - mkdir themes/gutenberg-rustref/static themes/gutenberg-rustref/sass
   - gutenberg build
   - cp ../_redirects public/
+  - echo "/home /" > public/_redirects
+  - echo "http://test.rustref.com/* http://nocduro.com/:splat 301!" > public/_redirects
+  - echo "https://test.rustref.com/* http://nocduro.com/:splat 301!" > public/_redirects
+  - echo "http://hello.rustref.com/* http://nocduro.com/ 301!" > public/_redirects
 
 after_success:
   - echo $PWD

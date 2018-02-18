@@ -9,6 +9,8 @@ cache: cargo
 before_script:
   - wget https://github.com/Keats/gutenberg/releases/download/v0.3.1/gutenberg-v0.3.1-x86_64-unknown-linux-gnu.tar.gz -O /tmp/gutenberg.tar.gz
   - tar -xvf /tmp/gutenberg.tar.gz
+  - wget https://github.com/netlify/netlifyctl/releases/download/v0.3.1/netlifyctl-linux-amd64-0.3.1.tar.gz -O /tmp/netlifyctl.tar.gz
+  - tar -xvf /tmp/netlifyctl.tar.gz
   - export PATH=$PATH:$PWD/
 
 script:
@@ -20,4 +22,5 @@ script:
   - cp ../_redirects public/
 
 after_success:
-  - .ci/push.sh
+  - echo $PWD
+  - netlifyctl deploy -s $NETLIFY_SITE_ID -A $NETLIFY_TOKEN -b public

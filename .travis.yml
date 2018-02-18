@@ -18,9 +18,10 @@ script:
   - mkdir themes/gutenberg-rustref/static themes/gutenberg-rustref/sass
   - gutenberg build
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  local-dir: website/public
-  target-branch: rendered
+after_success:
+  - git config --global user.email "travis@travis-ci.org"
+  - git config --global user.name "Travis CI"
+  - git checkout -b rendered
+  - git commit -am "Travis build: $TRAVIS_BUILD_NUMBER"
+  - git remote add origin-pages https://${GH_TOKEN}@github.com/nocduro/rustref.git > /dev/null 2>&1
+  - git push --quiet --force --set-upstream origin-pages rendered

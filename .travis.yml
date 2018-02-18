@@ -24,6 +24,9 @@ script:
   - echo "http://test.rustref.com/* http://nocduro.com/:splat 301!" >> public/_redirects
   - echo "https://test.rustref.com/* http://nocduro.com/:splat 301!" >> public/_redirects
   - echo "http://hello.rustref.com/* http://nocduro.com/ 301!" >> public/_redirects
+  - echo "http://test2.rustref.com/ http://nocduro.com/" >> public/_redirects
+  - echo "http://test3.rustref.com/ http://nocduro.com/ 200" >> public/_redirects
+  - echo "http://test4.rustref.com/ http://nocduro.com/ 200!" >> public/_redirects
   - cat public/_redirects
 
 after_success:

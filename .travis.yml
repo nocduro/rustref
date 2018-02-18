@@ -1,0 +1,19 @@
+language: rust
+rust:
+  - stable
+  - beta
+  - nightly
+matrix:
+  allow_failures:
+    - rust: nightly
+cache: cargo
+
+before_script:
+  - wget https://github.com/Keats/gutenberg/releases/download/v0.3.1/gutenberg-v0.3.1-x86_64-unknown-linux-gnu.tar.gz -O /tmp/gutenberg.tar.gz
+  - tar -xvf /tmp/gutenberg.tar.gz
+  - export PATH=$PATH:$PWD/
+
+script:
+  - cargo test --verbose
+  - cargo run redirects.toml --release
+  - gutenberg build

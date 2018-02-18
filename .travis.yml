@@ -14,6 +14,7 @@ before_script:
   - export PATH=$PATH:$PWD/
 
 script:
-  - cargo test --verbose
+  - cargo test --verbose --release
   - cargo run redirects.toml --release
+  - cd website
   - gutenberg build

@@ -17,6 +17,7 @@ script:
   - cd website
   - mkdir themes/gutenberg-rustref/static themes/gutenberg-rustref/sass
   - gutenberg build
+  - cp ../_redirects public/
 
 after_success:
   - git config --global user.email "travis@travis-ci.org"

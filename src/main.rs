@@ -83,7 +83,7 @@ fn generate_redirects<P: AsRef<Path>>(redirects: &mut [Redirect], output_path: P
     let mut netlify = BufWriter::new(netlify);
     let netlify_string: String = redirects
         .iter()
-        .map(|r| format!("https://{}.rustref.com/* {} 301!\n", r.short, r.url))
+        .map(|r| format!("http://{}.rustref.com/* {} 301!\n", r.short, r.url))
         .collect();
 
     netlify

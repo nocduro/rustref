@@ -1,4 +1,8 @@
 [[redirect]]
+short = "api"
+url = "https://rust-lang-nursery.github.io/api-guidelines/"
+
+[[redirect]]
 short = "book"
 url = "https://doc.rust-lang.org/book/second-edition"
 

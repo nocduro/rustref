@@ -19,6 +19,10 @@ short = "cookbook"
 url = "https://rust-lang-nursery.github.io/rust-cookbook"
 
 [[redirect]]
+short = "embedded"
+url = "https://japaric.github.io/discovery/"
+
+[[redirect]]
 short = "ex"
 url = "https://rustbyexample.com/"
 
@@ -41,6 +45,10 @@ url = "https://rust-lang.github.io/rfcs"
 [[redirect]]
 short = "std"
 url = "https://doc.rust-lang.org/std"
+
+[[redirect]]
+short = "toolstate"
+url = "https://rust-lang-nursery.github.io/rust-toolstate/"
 
 [[redirect]]
 short = "unstable"

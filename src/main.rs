@@ -30,15 +30,40 @@ type CloudflareApi = Mutex<Cloudflare>;
 mod errors;
 use errors::Result;
 
+#[derive(Debug, Deserialize, Clone, PartialEq, Eq)]
+struct GithubUserShort {
+    name: String,
+    email: String,
+    username: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct Commit {
+    id: String,
+    tree_id: String,
+    distinct: bool,
+    message: String,
+    timestamp: String,
+    url: String,
+    author: GithubUserShort,
+    committer: GithubUserShort,
+    added: Vec<String>,
+    removed: Vec<String>,
+    modified: Vec<String>,
+}
+
 #[derive(Debug, Deserialize)]
 struct PushEvent {
     #[serde(rename = "ref")]
-    refx: String,
-    head: String,
+    refs: String,
     before: String,
-    size: u32,
-    distinct_size: u32,
-    commits: Value, // don't need this
+    after: String,
+    compare: String,
+    commits: Vec<Commit>,
+    head_commit: Commit,
+    repository: Value,
+    pusher: Value,
+    sender: Value,
 }
 
 #[derive(Deserialize)]
@@ -92,18 +117,7 @@ fn webhook(hook: Json<PushEvent>, redirs: State<RedirectMap>, cf: State<Cloudfla
     // check if this is a push to master. if not, return early
     update_redirect_map(redirs, cf).expect("update failed :(");
 
-    format!("ok")
-}
-
-#[post("/update", format = "application/json", data = "<redirects>")]
-fn update(redirects: Json<Vec<SiteRedirect>>, redirs: State<RedirectMap>, cf: State<CloudflareApi>) -> String {
-    println!("json is: {:?}", redirects);
-
-    match update_redirect_map(redirs, cf) {
-        Ok(_) => println!("redirects updated!"),
-        Err(e) => println!("Error with redir: {:?}", e),
-    }
-    "redirect map updated.\n".to_string()
+    "ok".to_string()
 }
 
 #[get("/")]
@@ -164,9 +178,40 @@ fn main() {
     rocket::ignite()
         .mount(
             "/",
-            routes![index, redirect, redirect_bare, update, webhook],
+            routes![index, redirect, redirect_bare, webhook],
         )
         .manage(RwLock::new(redirects))
         .manage(Mutex::new(cf_api))
         .launch();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn parse_readme_webhook() {
+        let json_str = include_str!("../test_data/readme_updated.json");
+        let parsed = serde_json::from_str::<PushEvent>(&json_str);
+        // println!("{:?}", parsed);
+        assert!(parsed.is_ok());
+        let push = parsed.unwrap();
+        assert!(push.refs == "refs/heads/rocket");
+        assert!(push.commits.len() > 0);
+        assert!(push.commits[0].modified.len() > 0);
+        assert!(push.commits[0].modified[0] == "Readme.md");
+    }
+
+    #[test]
+    fn verify_toml_parses() {
+        let toml_str = include_str!("../redirects.toml");
+        let parsed = toml::from_str::<TomlConfig>(&toml_str);
+        assert!(parsed.is_ok());
+        let redir_vec = parsed.unwrap().redirect;
+        assert!(redir_vec.len() > 0);
+        for redir in &redir_vec {
+            assert!(redir.short.len() > 0);
+            assert!(redir.url.len() > 0);
+        }
+    }
 }

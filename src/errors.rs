@@ -17,6 +17,7 @@ pub enum Error {
     RedirectErrors(Vec<RedirectError>),
 }
 
+#[allow(unused)]
 #[derive(Debug)]
 pub enum RedirectError {
     UrlMalformed(String),
@@ -42,7 +43,7 @@ impl From<toml::de::Error> for Error {
 }
 
 impl<T> From<std::sync::PoisonError<T>> for Error {
-    fn from(err: std::sync::PoisonError<T>) -> Error {
+    fn from(_err: std::sync::PoisonError<T>) -> Error {
         Error::Lock("ReadWrite lock was poisoned!".to_string())
     }
 }

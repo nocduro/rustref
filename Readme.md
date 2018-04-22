@@ -6,7 +6,7 @@ Built with Rocket 🚀
 Website design ~~copied~~ _inspired_ by http://neverssl.com with the original CSS author being: Mark Webster https://gist.github.com/markcwebster/9bdf30655cdd5279bad13993ac87c85d
 
 ## Overview
-When a request to *.rustref.com/** (that is not `www`), a Cloudflare page rule transforms the request to: https://rustref.com/redirect/*/** which then contacts the Rocket server.
+When a request to `*.rustref.com/**` (that is not `www`), a Cloudflare page rule transforms the request to: `https://rustref.com/redirect/*/**` which then contacts the Rocket server.
 The Rocket server then sends a 302 response code with the redirect domain to Cloudflare.
 Cloudflare will cache this value for 7 days in their proxy, and also set the cache header for the client to expire in 8 days.
 This should hopefully make subsequent lookups fast, no matter where you are in the world.

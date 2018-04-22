@@ -24,11 +24,11 @@ url = "https://japaric.github.io/discovery/"
 
 [[redirect]]
 short = "ex"
-url = "https://rustbyexample.com/"
+url = "https://doc.rust-lang.org/stable/rust-by-example/"
 
 [[redirect]]
 short = "example"
-url = "https://rustbyexample.com/"
+url = "https://doc.rust-lang.org/stable/rust-by-example/"
 
 [[redirect]]
 short = "ffi"

@@ -8,7 +8,6 @@ extern crate rocket;
 extern crate rocket_contrib;
 #[macro_use]
 extern crate serde_derive;
-extern crate serde_json;
 extern crate toml;
 
 use cloudflare::Cloudflare;
@@ -187,6 +186,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
+    extern crate serde_json;
     use super::*;
 
     #[test]

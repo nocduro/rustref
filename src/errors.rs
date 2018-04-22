@@ -17,11 +17,11 @@ pub enum Error {
     RedirectErrors(Vec<RedirectError>),
 }
 
-#[allow(unused)]
 #[derive(Debug)]
 pub enum RedirectError {
-    UrlMalformed(String),
-    SiteOffline(String),
+    BadUrl(String),
+    InvalidPage(String),
+    DuplicateRule(String),
 }
 
 impl From<cloudflare::Error> for Error {

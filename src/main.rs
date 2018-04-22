@@ -2,7 +2,10 @@ extern crate rayon;
 extern crate reqwest;
 #[macro_use]
 extern crate serde_derive;
+extern crate serde;
 extern crate toml;
+#[macro_use]
+extern crate hyper;
 
 use std::fs::File;
 use std::env;
@@ -27,6 +30,7 @@ struct Redirect {
 enum Error {
     UrlParseError(String),
     UrlStatusError(String),
+    MarkdownParseError,
 }
 
 fn main() {
@@ -99,26 +103,36 @@ fn generate_redirects<P: AsRef<Path>>(redirects: &mut [Redirect], output_path: P
         .and_then(|mut f| f.read_to_string(&mut markdown))
         .expect("could not find _index.md");
 
-    // remove the previous redirects
-    let heading_str = "## Current redirects:";
-    let split_point = markdown
-        .find(&heading_str)
-        .expect("Could not find heading in markdown file");
-    markdown.split_off(split_point);
-    markdown.push_str(&heading_str);
-    markdown.push('\n');
+    let markdown = modify_markdown(markdown, &redirects).unwrap();
 
-    // add in the redirects
-    redirects
-        .iter()
-        .for_each(|r| markdown.push_str(&format!("{0}.rustref.com → [{1}]({1})  \n", r.short, r.url)));
-    
     // write modified markdown back to file
     let markdown_file = File::create(&markdown_path).expect("Unable to create file");
     let mut markdown_file = BufWriter::new(markdown_file);
     markdown_file
         .write_all(markdown.as_bytes())
         .expect("Unable to write markdown file");
+}
+
+fn modify_markdown(mut markdown: String, redirects: &[Redirect]) -> Result<String, Error> {
+    // remove any old redirects
+    let heading_str = "## Current redirects:";
+    let split_point = markdown
+        .find(&heading_str)
+        .ok_or(Error::MarkdownParseError)?;
+
+    markdown.split_off(split_point);
+    markdown.push_str(&heading_str);
+    markdown.push('\n');
+
+    // add in redirects
+    redirects.iter().for_each(|r| {
+        markdown.push_str(&format!(
+            "{0}.rustref.com → [{1}]({1})  \n",
+            r.short, r.url
+        ))
+    });
+
+    Ok(markdown)
 }
 
 /// Verify that `url` is syntactically valid, and that the page is reachable

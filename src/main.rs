@@ -256,17 +256,29 @@ mod tests {
             Err(Error::RedirectErrors(e)) => {
                 let fail_str: String = e.iter().map(|f| format!("{:?}\n", f)).collect();
                 panic!(fail_str);
-            },
+            }
             Err(e) => panic!("invalid redirect error: {:?}", e),
         }
     }
 
     #[test]
     fn malformed_urls() {
-        let bad1 = SiteRedirect{short: "bad1".to_string(), url: "@#hello/test".to_string()};
-        let bad2 = SiteRedirect{short: "bad2".to_string(), url: "/example.com".to_string()};
-        let bad3 = SiteRedirect{short: "bad3".to_string(), url: "http://example".to_string()};
-        let bad4 = SiteRedirect{short: "bad4".to_string(), url: "test".to_string()};
+        let bad1 = SiteRedirect {
+            short: "bad1".to_string(),
+            url: "@#hello/test".to_string(),
+        };
+        let bad2 = SiteRedirect {
+            short: "bad2".to_string(),
+            url: "/example.com".to_string(),
+        };
+        let bad3 = SiteRedirect {
+            short: "bad3".to_string(),
+            url: "http://example".to_string(),
+        };
+        let bad4 = SiteRedirect {
+            short: "bad4".to_string(),
+            url: "test".to_string(),
+        };
         let mut vector = vec![bad1, bad2, bad3, bad4];
         match verify_redirects(&mut vector) {
             Ok(_) => panic!("should fail"),
@@ -280,16 +292,25 @@ mod tests {
                     fail_str.push('\n');
                 }
                 panic!(fail_str);
-            },
+            }
             Err(e) => panic!("unexpected error: {:?}", e),
         }
     }
 
     #[test]
     fn test_duplicate_redirects() {
-        let bad1 = SiteRedirect{short: "same".to_string(), url: "https://nocduro.com".to_string()};
-        let bad2 = SiteRedirect{short: "same".to_string(), url: "https://google.com".to_string()};
-        let bad3 = SiteRedirect{short: "bad2".to_string(), url: "https://google.com".to_string()};
+        let bad1 = SiteRedirect {
+            short: "same".to_string(),
+            url: "https://nocduro.com".to_string(),
+        };
+        let bad2 = SiteRedirect {
+            short: "same".to_string(),
+            url: "https://google.com".to_string(),
+        };
+        let bad3 = SiteRedirect {
+            short: "bad2".to_string(),
+            url: "https://google.com".to_string(),
+        };
         let mut vector = vec![bad1, bad2, bad3];
         match verify_redirects(&mut vector) {
             Ok(_) => panic!("unexpected pass"),
@@ -298,7 +319,7 @@ mod tests {
                     return;
                 }
                 panic!("Expected 1 failure for the duplicate");
-            },
+            }
             Err(e) => panic!("unexpected error: {:?}", e),
         }
     }

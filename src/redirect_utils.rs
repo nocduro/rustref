@@ -37,7 +37,7 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
     // before setting the new redirects, make sure that cloudflare was updated successfully
     // get current CNAME records:
     let cf_api = cf.lock()?;
-    let zone_id = cloudflare::zones::get_zoneid(&cf_api, "nocduro.com")?;
+    let zone_id = cloudflare::zones::get_zoneid(&cf_api, "rustref.com")?;
     println!("zone id: {}", &zone_id);
     let cname_records = dns::list_dns_of_type(&cf_api, &zone_id, dns::RecordType::CNAME)?;
     // println!("dns: {:#?}", &cname_records);
@@ -48,7 +48,7 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
             // filter out existing redirects that already have CNAME entries
             !cname_records
                 .iter()
-                .any(|x| x.name == format!("{}.nocduro.com", r.short))
+                .any(|x| x.name == format!("{}.rustref.com", r.short))
         })
         .map(|new_redir| {
             // create the CNAME record for new redirects
@@ -57,8 +57,8 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
                 &cf_api,
                 &zone_id,
                 dns::RecordType::CNAME,
-                &format!("{}.nocduro.com", new_redir.short),
-                "nocduro.com",
+                &format!("{}.rustref.com", new_redir.short),
+                "rustref.com",
             )
         })
         .filter_map(|x| x.err())

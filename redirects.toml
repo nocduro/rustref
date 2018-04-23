@@ -11,6 +11,10 @@ short = "cargo"
 url = "https://doc.rust-lang.org/cargo/"
 
 [[redirect]]
+short = "clippy"
+url = "https://rust-lang-nursery.github.io/rust-clippy/"
+
+[[redirect]]
 short = "cook"
 url = "https://rust-lang-nursery.github.io/rust-cookbook"
 

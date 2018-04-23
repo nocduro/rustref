@@ -20,13 +20,15 @@ use rocket_contrib::{Json, Value};
 use std::collections::HashMap;
 use std::sync::{Mutex, RwLock};
 
+mod errors;
+mod redirect_utils;
+
+pub use errors::{Error, Result};
+
 type RedirectMap = RwLock<HashMap<String, String>>;
 type CloudflareApi = Mutex<Cloudflare>;
 
-mod errors;
-mod redirect_utils;
-pub use errors::{Error, Result};
-
+/// Represents a Github user that is passed in by the Github webhook API
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq)]
 struct GithubUserShort {
     name: String,
@@ -34,6 +36,7 @@ struct GithubUserShort {
     username: String,
 }
 
+/// Represents a Github commit that is passed in by the Github webhook API
 #[derive(Debug, Deserialize)]
 struct Commit {
     id: String,
@@ -49,6 +52,7 @@ struct Commit {
     modified: Vec<String>,
 }
 
+/// Represents a PushEvent that is passed in by the Github webhook API
 #[derive(Debug, Deserialize)]
 struct PushEvent {
     #[serde(rename = "ref")]
@@ -63,7 +67,8 @@ struct PushEvent {
     sender: Value,
 }
 
-fn redirects_updated(push: PushEvent) -> bool {
+/// Checks each modified file in the PushEvent to see if `redirects.toml` was modified
+fn redirects_updated(push: &PushEvent) -> bool {
     for commit in &push.commits {
         if commit.modified.iter().any(|file| file == "redirects.toml") {
             return true;
@@ -72,38 +77,50 @@ fn redirects_updated(push: PushEvent) -> bool {
     false
 }
 
+/// Update the servers redirect map whenever `redirects.toml` is updated in the
+/// master branch on Github.
+///
+/// Called by Github's servers whenever there is a `push` event in the Github repository.
+/// Returns 200 with message if everything went ok, otherwise a 500 internal error if
+/// something went wrong when updating the redirect map
 #[post("/github/webhook", format = "application/json", data = "<hook>")]
 fn webhook(
     hook: Json<PushEvent>,
     redirs: State<RedirectMap>,
     cf: State<CloudflareApi>,
 ) -> Result<&'static str> {
-    println!("webhook! {:?}", hook);
     let push: PushEvent = hook.0;
 
     // check if this is a push to master. if not, return early
     if push.refs != "refs/heads/master" {
-        return Ok("Event not on master branch, ignoring");
+        return Ok("Event not on master branch, ignoring\n");
     }
 
     // check that the redirects file was actually modified
-    if !redirects_updated(push) {
-        return Ok("redirects.toml was not modified, ignoring");
+    if !redirects_updated(&push) {
+        return Ok("redirects.toml was not modified, ignoring\n");
     }
 
-    redirect_utils::update_redirect_map(redirs, cf).map(|_| Ok("Redirects Updated!"))?
+    redirect_utils::update_redirect_map(redirs, cf).map(|_| Ok("Redirects Updated!\n"))?
 }
 
+/// Return a page listing all current redirects in alphabetic order
 #[get("/")]
 fn index(redirs: State<RedirectMap>) -> String {
     let redirs = redirs.read().expect("rlock failed");
-    let mut output = String::new();
-    for (short, url) in redirs.iter() {
-        output.push_str(&format!("{}.rustref.com -> {}\n", short, url));
-    }
-    output
+
+    let mut vector: Vec<_> = redirs.iter().collect();
+    vector.sort();
+    vector
+        .iter()
+        .map(|(short, url)| format!("{}.rustref.com -> {}\n", short, url))
+        .collect()
 }
 
+/// Redirect a subdomain to its matching page via 302 redirect.
+/// If `key` is not in the redirect map return 404.
+///
+/// Example: cook.rustref.com => https://doc.rust-lang.org/cargo/
 #[get("/redirect/<key>")]
 fn redirect_bare(key: String, redirs: State<RedirectMap>) -> Option<Redirect> {
     let map = redirs.read().expect("could not lock rlock");
@@ -113,6 +130,11 @@ fn redirect_bare(key: String, redirs: State<RedirectMap>) -> Option<Redirect> {
     }
 }
 
+/// Redirect a subdomain to its matching page via 302 redirect, preserving path.
+/// If `key` is not in the redirect map return 404.
+///
+/// Example: ex.rustref.com/primitives.html =>
+///     https://doc.rust-lang.org/stable/rust-by-example/primitives.html
 #[get("/redirect/<key>/<path>")]
 fn redirect(key: String, path: &RawStr, redirs: State<RedirectMap>) -> Option<Redirect> {
     let map = redirs.read().expect("could not lock rlock");
@@ -157,7 +179,7 @@ mod tests {
         assert!(push.commits.len() > 0);
         assert!(push.commits[0].modified.len() > 0);
         assert!(push.commits[0].modified[0] == "Readme.md");
-        assert!(!redirects_updated(push));
+        assert!(!redirects_updated(&push));
     }
 
     #[test]
@@ -167,7 +189,7 @@ mod tests {
 
         assert!(parsed.is_ok());
         let push = parsed.unwrap();
-        assert!(push.refs == "refs/heads/rocket");
-        assert!(redirects_updated(push));
+        assert!(push.refs == "refs/heads/master");
+        assert!(redirects_updated(&push));
     }
 }

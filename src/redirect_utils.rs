@@ -75,6 +75,7 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
     {
         let mut redir_map = redirs.write()?;
         *redir_map = vec_redirects_to_hashmap(&new_redirects);
+        println!("map: {:#?}", *redir_map);
     }
 
     // TODO: overwrite "redirects.toml" so next server restart we get the latest config from file

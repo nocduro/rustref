@@ -29,7 +29,7 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
     // download new redirect config from github
     println!("downloading updated redirect file...");
     let toml_str = reqwest::get(
-        "https://raw.githubusercontent.com/nocduro/rustref/rocket/redirects.toml",
+        "https://raw.githubusercontent.com/nocduro/rustref/master/redirects.toml",
     )?.text()?;
     let mut new_redirects = toml::from_str::<TomlConfig>(&toml_str)?.redirect;
     verify_redirects(&mut new_redirects)?;

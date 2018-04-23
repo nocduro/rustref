@@ -47,6 +47,14 @@ short = "rfc"
 url = "https://rust-lang.github.io/rfcs"
 
 [[redirect]]
+short = "rustc"
+url = "https://rust-lang-nursery.github.io/rustc-guide/"
+
+[[redirect]]
+short = "serde"
+url = "https://serde.rs"
+
+[[redirect]]
 short = "std"
 url = "https://doc.rust-lang.org/std"
 

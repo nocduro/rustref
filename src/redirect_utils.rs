@@ -42,12 +42,40 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
     let cname_records = dns::list_dns_of_type(&cf_api, &zone_id, dns::RecordType::CNAME)?;
     println!("dns: {:#?}", &cname_records);
 
+    let cf_errors: Vec<_> = new_redirects
+        .iter()
+        .filter(|r| {
+            // filter out existing redirects that already have CNAME entries
+            !cname_records
+                .iter()
+                .any(|x| x.name == format!("{}.nocduro.com", r.short))
+        })
+        .map(|new_redir| {
+            // create the CNAME record for new redirects
+            println!("new redirect: {:?}", new_redir);
+            dns::create_proxied_dns_entry(
+                &cf_api,
+                &zone_id,
+                dns::RecordType::CNAME,
+                &format!("{}.nocduro.com", new_redir.short),
+                "nocduro.com",
+            )
+        })
+        .filter_map(|x| x.err())
+        .collect();
+
+    // just print out cloudflare errors for now
+    for e in cf_errors {
+        println!("Cloudflare error with: {:?}", e)
+    }
+
+    // update the map, then unlock asap
     {
         let mut redir_map = redirs.write()?;
         *redir_map = vec_redirects_to_hashmap(&new_redirects);
     }
 
-    // overwrite "redirects.toml" so, on next server restart we get the latest config from file??
+    // TODO: overwrite "redirects.toml" so next server restart we get the latest config from file
     Ok(())
 }
 

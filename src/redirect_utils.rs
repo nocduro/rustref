@@ -29,7 +29,7 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
     // download new redirect config from github
     println!("downloading updated redirect file...");
     let toml_str = reqwest::get(
-        "https://raw.githubusercontent.com/nocduro/rustref/master/redirects.toml",
+        "https://raw.githubusercontent.com/nocduro/rustref/rocket/redirects.toml",
     )?.text()?;
     let mut new_redirects = toml::from_str::<TomlConfig>(&toml_str)?.redirect;
     verify_redirects(&mut new_redirects)?;
@@ -40,7 +40,7 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
     let zone_id = cloudflare::zones::get_zoneid(&cf_api, "nocduro.com")?;
     println!("zone id: {}", &zone_id);
     let cname_records = dns::list_dns_of_type(&cf_api, &zone_id, dns::RecordType::CNAME)?;
-    println!("dns: {:#?}", &cname_records);
+    // println!("dns: {:#?}", &cname_records);
 
     let cf_errors: Vec<_> = new_redirects
         .iter()
@@ -69,6 +69,8 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
         println!("Cloudflare error with: {:?}", e)
     }
 
+    // clear Cloudflare's cache
+
     // update the map, then unlock asap
     {
         let mut redir_map = redirs.write()?;
@@ -96,7 +98,7 @@ fn verify_redirects(redirects: &mut [SiteRedirect]) -> Result<()> {
             .collect::<Vec<RedirectError>>(),
     );
 
-    if errors.len() > 0 {
+    if !errors.is_empty() {
         Err(Error::RedirectErrors(errors))
     } else {
         Ok(())
@@ -106,13 +108,14 @@ fn verify_redirects(redirects: &mut [SiteRedirect]) -> Result<()> {
 /// Verify that `url` is syntactically valid, and that the page is reachable
 fn check_url(url: &str) -> std::result::Result<(), RedirectError> {
     let resp = reqwest::get(url).map_err(|_e| RedirectError::BadUrl(url.to_string()))?;
-    match resp.status().is_success() {
-        true => Ok(()),
-        false => Err(RedirectError::InvalidPage(format!(
+    if resp.status().is_success() {
+        Ok(())
+    } else {
+        Err(RedirectError::InvalidPage(format!(
             "{}: {}",
             url,
             resp.status()
-        ))),
+        )))
     }
 }
 

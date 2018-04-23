@@ -1,0 +1,184 @@
+{
+  "ref": "refs/heads/rocket",
+  "before": "a11ab3c60e89b72557f4911fa29f3ca537d0d048",
+  "after": "290eb3da5cab8f776e588d14c6fc38e9a844c8cf",
+  "created": false,
+  "deleted": false,
+  "forced": false,
+  "base_ref": null,
+  "compare": "https://github.com/nocduro/rustref/compare/a11ab3c60e89...290eb3da5cab",
+  "commits": [
+    {
+      "id": "290eb3da5cab8f776e588d14c6fc38e9a844c8cf",
+      "tree_id": "44e83f3ad86e5d305dd0e0183492c3febeaf6a43",
+      "distinct": true,
+      "message": "escape * so they show up properly",
+      "timestamp": "2018-04-22T02:57:56-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/290eb3da5cab8f776e588d14c6fc38e9a844c8cf",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "nocduro@outlook.com",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "username": "web-flow"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "Readme.md"
+      ]
+    }
+  ],
+  "head_commit": {
+    "id": "290eb3da5cab8f776e588d14c6fc38e9a844c8cf",
+    "tree_id": "44e83f3ad86e5d305dd0e0183492c3febeaf6a43",
+    "distinct": true,
+    "message": "escape * so they show up properly",
+    "timestamp": "2018-04-22T02:57:56-06:00",
+    "url": "https://github.com/nocduro/rustref/commit/290eb3da5cab8f776e588d14c6fc38e9a844c8cf",
+    "author": {
+      "name": "Mackenzie Hauck",
+      "email": "nocduro@outlook.com",
+      "username": "nocduro"
+    },
+    "committer": {
+      "name": "GitHub",
+      "email": "noreply@github.com",
+      "username": "web-flow"
+    },
+    "added": [
+
+    ],
+    "removed": [
+
+    ],
+    "modified": [
+      "Readme.md"
+    ]
+  },
+  "repository": {
+    "id": 121932941,
+    "name": "rustref",
+    "full_name": "nocduro/rustref",
+    "owner": {
+      "name": "nocduro",
+      "email": "nocduro@outlook.com",
+      "login": "nocduro",
+      "id": 11658092,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11658092?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nocduro",
+      "html_url": "https://github.com/nocduro",
+      "followers_url": "https://api.github.com/users/nocduro/followers",
+      "following_url": "https://api.github.com/users/nocduro/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nocduro/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nocduro/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nocduro/subscriptions",
+      "organizations_url": "https://api.github.com/users/nocduro/orgs",
+      "repos_url": "https://api.github.com/users/nocduro/repos",
+      "events_url": "https://api.github.com/users/nocduro/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nocduro/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "private": false,
+    "html_url": "https://github.com/nocduro/rustref",
+    "description": "http://rustref.com - Rust documentation redirects",
+    "fork": false,
+    "url": "https://github.com/nocduro/rustref",
+    "forks_url": "https://api.github.com/repos/nocduro/rustref/forks",
+    "keys_url": "https://api.github.com/repos/nocduro/rustref/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/nocduro/rustref/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/nocduro/rustref/teams",
+    "hooks_url": "https://api.github.com/repos/nocduro/rustref/hooks",
+    "issue_events_url": "https://api.github.com/repos/nocduro/rustref/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/nocduro/rustref/events",
+    "assignees_url": "https://api.github.com/repos/nocduro/rustref/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/nocduro/rustref/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/nocduro/rustref/tags",
+    "blobs_url": "https://api.github.com/repos/nocduro/rustref/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/nocduro/rustref/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/nocduro/rustref/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/nocduro/rustref/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/nocduro/rustref/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/nocduro/rustref/languages",
+    "stargazers_url": "https://api.github.com/repos/nocduro/rustref/stargazers",
+    "contributors_url": "https://api.github.com/repos/nocduro/rustref/contributors",
+    "subscribers_url": "https://api.github.com/repos/nocduro/rustref/subscribers",
+    "subscription_url": "https://api.github.com/repos/nocduro/rustref/subscription",
+    "commits_url": "https://api.github.com/repos/nocduro/rustref/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/nocduro/rustref/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/nocduro/rustref/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/nocduro/rustref/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/nocduro/rustref/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/nocduro/rustref/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/nocduro/rustref/merges",
+    "archive_url": "https://api.github.com/repos/nocduro/rustref/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/nocduro/rustref/downloads",
+    "issues_url": "https://api.github.com/repos/nocduro/rustref/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/nocduro/rustref/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/nocduro/rustref/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/nocduro/rustref/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/nocduro/rustref/labels{/name}",
+    "releases_url": "https://api.github.com/repos/nocduro/rustref/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/nocduro/rustref/deployments",
+    "created_at": 1518942407,
+    "updated_at": "2018-02-18T11:08:35Z",
+    "pushed_at": 1524387477,
+    "git_url": "git://github.com/nocduro/rustref.git",
+    "ssh_url": "git@github.com:nocduro/rustref.git",
+    "clone_url": "https://github.com/nocduro/rustref.git",
+    "svn_url": "https://github.com/nocduro/rustref",
+    "homepage": "",
+    "size": 27,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": "HTML",
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": true,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "open_issues_count": 0,
+    "license": null,
+    "forks": 0,
+    "open_issues": 0,
+    "watchers": 0,
+    "default_branch": "master",
+    "stargazers": 0,
+    "master_branch": "master"
+  },
+  "pusher": {
+    "name": "nocduro",
+    "email": "nocduro@outlook.com"
+  },
+  "sender": {
+    "login": "nocduro",
+    "id": 11658092,
+    "avatar_url": "https://avatars2.githubusercontent.com/u/11658092?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/nocduro",
+    "html_url": "https://github.com/nocduro",
+    "followers_url": "https://api.github.com/users/nocduro/followers",
+    "following_url": "https://api.github.com/users/nocduro/following{/other_user}",
+    "gists_url": "https://api.github.com/users/nocduro/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/nocduro/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/nocduro/subscriptions",
+    "organizations_url": "https://api.github.com/users/nocduro/orgs",
+    "repos_url": "https://api.github.com/users/nocduro/repos",
+    "events_url": "https://api.github.com/users/nocduro/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/nocduro/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+}

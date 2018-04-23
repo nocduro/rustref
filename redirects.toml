@@ -1,10 +1,18 @@
 [[redirect]]
+short = "api"
+url = "https://rust-lang-nursery.github.io/api-guidelines/"
+
+[[redirect]]
 short = "book"
 url = "https://doc.rust-lang.org/book/second-edition"
 
 [[redirect]]
 short = "cargo"
 url = "https://doc.rust-lang.org/cargo/"
+
+[[redirect]]
+short = "clippy"
+url = "https://rust-lang-nursery.github.io/rust-clippy/"
 
 [[redirect]]
 short = "cook"
@@ -15,12 +23,16 @@ short = "cookbook"
 url = "https://rust-lang-nursery.github.io/rust-cookbook"
 
 [[redirect]]
+short = "embedded"
+url = "https://japaric.github.io/discovery/"
+
+[[redirect]]
 short = "ex"
-url = "https://rustbyexample.com/"
+url = "https://doc.rust-lang.org/stable/rust-by-example/"
 
 [[redirect]]
 short = "example"
-url = "https://rustbyexample.com/"
+url = "https://doc.rust-lang.org/stable/rust-by-example/"
 
 [[redirect]]
 short = "ffi"
@@ -35,8 +47,20 @@ short = "rfc"
 url = "https://rust-lang.github.io/rfcs"
 
 [[redirect]]
+short = "rustc"
+url = "https://rust-lang-nursery.github.io/rustc-guide/"
+
+[[redirect]]
+short = "serde"
+url = "https://serde.rs"
+
+[[redirect]]
 short = "std"
 url = "https://doc.rust-lang.org/std"
+
+[[redirect]]
+short = "toolstate"
+url = "https://rust-lang-nursery.github.io/rust-toolstate/"
 
 [[redirect]]
 short = "unstable"

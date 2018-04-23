@@ -1,0 +1,377 @@
+{
+  "ref": "refs/heads/rocket",
+  "before": "290eb3da5cab8f776e588d14c6fc38e9a844c8cf",
+  "after": "faae885d6c4d70ba962766d04368c29ea061c0b9",
+  "created": false,
+  "deleted": false,
+  "forced": false,
+  "base_ref": null,
+  "compare": "https://github.com/nocduro/rustref/compare/290eb3da5cab...faae885d6c4d",
+  "commits": [
+    {
+      "id": "9ec67ffa3badb7b0fe33764d141a1ee3e51075c9",
+      "tree_id": "11db80d69c3a01cd99422e7db1dc6abb31e115c7",
+      "distinct": true,
+      "message": "add basic tests, make PushEvent parse properly",
+      "timestamp": "2018-04-22T04:50:37-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/9ec67ffa3badb7b0fe33764d141a1ee3e51075c9",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "added": [
+        "test_data/readme_updated.json"
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "src/errors.rs",
+        "src/main.rs"
+      ]
+    },
+    {
+      "id": "c4175db9bb423bf5cd2492da307298fbe01910b0",
+      "tree_id": "f14579ba5c60fc2bb3b24cb7c9ba9d7ecd38e667",
+      "distinct": true,
+      "message": "remove unnecessary extern crate",
+      "timestamp": "2018-04-22T04:55:20-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/c4175db9bb423bf5cd2492da307298fbe01910b0",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "Cargo.toml",
+        "src/main.rs"
+      ]
+    },
+    {
+      "id": "446349048a95401b4495cd19989de15920bf80a9",
+      "tree_id": "63fa1c43f1e21d5cad15e9facec6d4646fffa4bc",
+      "distinct": true,
+      "message": "fix rustbyexample due to certificate troubles",
+      "timestamp": "2018-04-22T05:49:40-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/446349048a95401b4495cd19989de15920bf80a9",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "redirects.toml"
+      ]
+    },
+    {
+      "id": "bb11e8e884ce9cd0edf1ef003c18d68d2a19c14e",
+      "tree_id": "1cb3a4bf9f73bc16e1e1646fe92bb59a18deafd9",
+      "distinct": true,
+      "message": "rename RedirectError variants to be more accurate",
+      "timestamp": "2018-04-22T05:50:33-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/bb11e8e884ce9cd0edf1ef003c18d68d2a19c14e",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "src/errors.rs"
+      ]
+    },
+    {
+      "id": "14f660ec4b05d3d16d13f641018a5a28b723064d",
+      "tree_id": "89b1a2447cba2f9ed76ed8b0f2c0b0df9abb4355",
+      "distinct": true,
+      "message": "add more tests, and verify URLs",
+      "timestamp": "2018-04-22T05:50:51-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/14f660ec4b05d3d16d13f641018a5a28b723064d",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "Cargo.lock",
+        "Cargo.toml",
+        "src/main.rs"
+      ]
+    },
+    {
+      "id": "73511ca45261f5c4f3c58e5f09727cf0ea6a3061",
+      "tree_id": "a255278d27006f2cc58250ba5854e4be48607b01",
+      "distinct": true,
+      "message": "run rustfmt",
+      "timestamp": "2018-04-22T05:52:26-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/73511ca45261f5c4f3c58e5f09727cf0ea6a3061",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "src/main.rs"
+      ]
+    },
+    {
+      "id": "d334afdb4d57592ae736f3ce7117a9f13f79f40d",
+      "tree_id": "d02ca87bc73febd0b4dfa4508a0405b564415387",
+      "distinct": true,
+      "message": "split redirect helper functions into their own file",
+      "timestamp": "2018-04-22T06:09:15-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/d334afdb4d57592ae736f3ce7117a9f13f79f40d",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "added": [
+        "src/redirect_utils.rs"
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "src/main.rs"
+      ]
+    },
+    {
+      "id": "faae885d6c4d70ba962766d04368c29ea061c0b9",
+      "tree_id": "a3c961cbe487be9fb0e94cbb07a6ade8bd25c1ce",
+      "distinct": true,
+      "message": "Merge branch 'rocket' of https://github.com/nocduro/rustref into rocket",
+      "timestamp": "2018-04-22T06:10:29-06:00",
+      "url": "https://github.com/nocduro/rustref/commit/faae885d6c4d70ba962766d04368c29ea061c0b9",
+      "author": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "committer": {
+        "name": "Mackenzie Hauck",
+        "email": "mhauck@live.ca",
+        "username": "nocduro"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "Readme.md"
+      ]
+    }
+  ],
+  "head_commit": {
+    "id": "faae885d6c4d70ba962766d04368c29ea061c0b9",
+    "tree_id": "a3c961cbe487be9fb0e94cbb07a6ade8bd25c1ce",
+    "distinct": true,
+    "message": "Merge branch 'rocket' of https://github.com/nocduro/rustref into rocket",
+    "timestamp": "2018-04-22T06:10:29-06:00",
+    "url": "https://github.com/nocduro/rustref/commit/faae885d6c4d70ba962766d04368c29ea061c0b9",
+    "author": {
+      "name": "Mackenzie Hauck",
+      "email": "mhauck@live.ca",
+      "username": "nocduro"
+    },
+    "committer": {
+      "name": "Mackenzie Hauck",
+      "email": "mhauck@live.ca",
+      "username": "nocduro"
+    },
+    "added": [
+
+    ],
+    "removed": [
+
+    ],
+    "modified": [
+      "Readme.md"
+    ]
+  },
+  "repository": {
+    "id": 121932941,
+    "name": "rustref",
+    "full_name": "nocduro/rustref",
+    "owner": {
+      "name": "nocduro",
+      "email": "nocduro@outlook.com",
+      "login": "nocduro",
+      "id": 11658092,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11658092?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nocduro",
+      "html_url": "https://github.com/nocduro",
+      "followers_url": "https://api.github.com/users/nocduro/followers",
+      "following_url": "https://api.github.com/users/nocduro/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nocduro/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nocduro/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nocduro/subscriptions",
+      "organizations_url": "https://api.github.com/users/nocduro/orgs",
+      "repos_url": "https://api.github.com/users/nocduro/repos",
+      "events_url": "https://api.github.com/users/nocduro/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nocduro/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "private": false,
+    "html_url": "https://github.com/nocduro/rustref",
+    "description": "http://rustref.com - Rust documentation redirects",
+    "fork": false,
+    "url": "https://github.com/nocduro/rustref",
+    "forks_url": "https://api.github.com/repos/nocduro/rustref/forks",
+    "keys_url": "https://api.github.com/repos/nocduro/rustref/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/nocduro/rustref/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/nocduro/rustref/teams",
+    "hooks_url": "https://api.github.com/repos/nocduro/rustref/hooks",
+    "issue_events_url": "https://api.github.com/repos/nocduro/rustref/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/nocduro/rustref/events",
+    "assignees_url": "https://api.github.com/repos/nocduro/rustref/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/nocduro/rustref/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/nocduro/rustref/tags",
+    "blobs_url": "https://api.github.com/repos/nocduro/rustref/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/nocduro/rustref/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/nocduro/rustref/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/nocduro/rustref/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/nocduro/rustref/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/nocduro/rustref/languages",
+    "stargazers_url": "https://api.github.com/repos/nocduro/rustref/stargazers",
+    "contributors_url": "https://api.github.com/repos/nocduro/rustref/contributors",
+    "subscribers_url": "https://api.github.com/repos/nocduro/rustref/subscribers",
+    "subscription_url": "https://api.github.com/repos/nocduro/rustref/subscription",
+    "commits_url": "https://api.github.com/repos/nocduro/rustref/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/nocduro/rustref/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/nocduro/rustref/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/nocduro/rustref/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/nocduro/rustref/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/nocduro/rustref/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/nocduro/rustref/merges",
+    "archive_url": "https://api.github.com/repos/nocduro/rustref/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/nocduro/rustref/downloads",
+    "issues_url": "https://api.github.com/repos/nocduro/rustref/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/nocduro/rustref/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/nocduro/rustref/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/nocduro/rustref/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/nocduro/rustref/labels{/name}",
+    "releases_url": "https://api.github.com/repos/nocduro/rustref/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/nocduro/rustref/deployments",
+    "created_at": 1518942407,
+    "updated_at": "2018-02-18T11:08:35Z",
+    "pushed_at": 1524399038,
+    "git_url": "git://github.com/nocduro/rustref.git",
+    "ssh_url": "git@github.com:nocduro/rustref.git",
+    "clone_url": "https://github.com/nocduro/rustref.git",
+    "svn_url": "https://github.com/nocduro/rustref",
+    "homepage": "",
+    "size": 47,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": "HTML",
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": true,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "open_issues_count": 0,
+    "license": null,
+    "forks": 0,
+    "open_issues": 0,
+    "watchers": 0,
+    "default_branch": "master",
+    "stargazers": 0,
+    "master_branch": "master"
+  },
+  "pusher": {
+    "name": "nocduro",
+    "email": "nocduro@outlook.com"
+  },
+  "sender": {
+    "login": "nocduro",
+    "id": 11658092,
+    "avatar_url": "https://avatars2.githubusercontent.com/u/11658092?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/nocduro",
+    "html_url": "https://github.com/nocduro",
+    "followers_url": "https://api.github.com/users/nocduro/followers",
+    "following_url": "https://api.github.com/users/nocduro/following{/other_user}",
+    "gists_url": "https://api.github.com/users/nocduro/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/nocduro/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/nocduro/subscriptions",
+    "organizations_url": "https://api.github.com/users/nocduro/orgs",
+    "repos_url": "https://api.github.com/users/nocduro/repos",
+    "events_url": "https://api.github.com/users/nocduro/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/nocduro/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+}

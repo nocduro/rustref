@@ -63,14 +63,35 @@ struct PushEvent {
     sender: Value,
 }
 
+fn redirects_updated(push: PushEvent) -> bool {
+    for commit in &push.commits {
+        if commit.modified.iter().any(|file| file == "redirects.toml") {
+            return true;
+        }
+    }
+    false
+}
+
 #[post("/github/webhook", format = "application/json", data = "<hook>")]
-fn webhook(hook: Json<PushEvent>, redirs: State<RedirectMap>, cf: State<CloudflareApi>) -> String {
+fn webhook(
+    hook: Json<PushEvent>,
+    redirs: State<RedirectMap>,
+    cf: State<CloudflareApi>,
+) -> Result<&'static str> {
     println!("webhook! {:?}", hook);
+    let push: PushEvent = hook.0;
 
     // check if this is a push to master. if not, return early
-    redirect_utils::update_redirect_map(redirs, cf).expect("update failed :(");
+    if push.refs != "refs/heads/master" {
+        return Ok("Event not on master branch, ignoring");
+    }
 
-    "ok".to_string()
+    // check that the redirects file was actually modified
+    if !redirects_updated(push) {
+        return Ok("redirects.toml was not modified, ignoring");
+    }
+
+    redirect_utils::update_redirect_map(redirs, cf).map(|_| Ok("Redirects Updated!"))?
 }
 
 #[get("/")]
@@ -136,5 +157,17 @@ mod tests {
         assert!(push.commits.len() > 0);
         assert!(push.commits[0].modified.len() > 0);
         assert!(push.commits[0].modified[0] == "Readme.md");
+        assert!(!redirects_updated(push));
+    }
+
+    #[test]
+    fn parse_webhook_multiple_commits() {
+        let json_str = include_str!("../test_data/multiple_commits.json");
+        let parsed = serde_json::from_str::<PushEvent>(&json_str);
+
+        assert!(parsed.is_ok());
+        let push = parsed.unwrap();
+        assert!(push.refs == "refs/heads/rocket");
+        assert!(redirects_updated(push));
     }
 }

@@ -65,7 +65,3 @@ url = "https://rust-lang-nursery.github.io/rust-toolstate/"
 [[redirect]]
 short = "unstable"
 url = "https://doc.rust-lang.org/nightly/unstable-book"
-
-[[redirect]]
-short = "www"
-url = "https://rustref.com"

@@ -15,7 +15,7 @@ use cloudflare::Cloudflare;
 use rocket::http::RawStr;
 use rocket::State;
 use rocket::response::Redirect;
-use rocket_contrib::{Json, Value};
+use rocket_contrib::{Json, Template, Value};
 
 use std::collections::HashMap;
 use std::sync::{Mutex, RwLock};
@@ -104,17 +104,23 @@ fn webhook(
     redirect_utils::update_redirect_map(redirs, cf).map(|_| Ok("Redirects Updated!\n"))?
 }
 
+#[derive(Debug, Serialize)]
+struct IndexTemplateVars<'a> {
+    redirects: &'a HashMap<String, String>,
+    commit: String,
+}
+
 /// Return a page listing all current redirects in alphabetic order
 #[get("/")]
-fn index(redirs: State<RedirectMap>) -> String {
+fn index(redirs: State<RedirectMap>) -> Template {
     let redirs = redirs.read().expect("rlock failed");
-
-    let mut vector: Vec<_> = redirs.iter().collect();
-    vector.sort();
-    vector
-        .iter()
-        .map(|(short, url)| format!("{}.rustref.com -> {}\n", short, url))
-        .collect()
+    Template::render(
+        "index",
+        IndexTemplateVars {
+            redirects: &*redirs,
+            commit: "commit_hash".to_string(),
+        },
+    )
 }
 
 /// Redirect a subdomain to its matching page via 302 redirect.
@@ -144,7 +150,7 @@ fn redirect(key: String, path: &RawStr, redirs: State<RedirectMap>) -> Option<Re
     }
 }
 
-fn main() {
+fn rocket() -> rocket::Rocket {
     let redirects = redirect_utils::redirects_from_file("redirects.toml")
         .expect("error reading redirects from file");
 
@@ -160,7 +166,11 @@ fn main() {
         .mount("/", routes![index, redirect, redirect_bare, webhook])
         .manage(RwLock::new(redirects))
         .manage(Mutex::new(cf_api))
-        .launch();
+        .attach(Template::fairing())
+}
+
+fn main() {
+    rocket().launch();
 }
 
 #[cfg(test)]

@@ -18,7 +18,7 @@ extern crate toml;
 
 use cloudflare::Cloudflare;
 use rocket::http::RawStr;
-use rocket::response::{Redirect, NamedFile};
+use rocket::response::{NamedFile, Redirect};
 use rocket::State;
 use rocket_contrib::Template;
 
@@ -37,8 +37,7 @@ type RedirectMap = RwLock<RedirectData>;
 type CloudflareApi = Mutex<Cloudflare>;
 
 lazy_static! {
-    static ref GH_SECRET: String =
-        dotenv::var("github_secret").expect("github secret ENV not found!");
+    static ref GH_SECRET: String = dotenv::var("github_secret").expect("github secret ENV not found!");
 }
 
 #[derive(Debug, Serialize)]
@@ -159,7 +158,7 @@ mod tests {
         assert!(push.commits.len() > 0);
         assert!(push.commits[0].modified.len() > 0);
         assert!(push.commits[0].modified[0] == "Readme.md");
-        assert!(!redirects_updated(&push));
+        assert!(!push.file_modified("redirects.toml"));
     }
 
     #[test]
@@ -170,18 +169,6 @@ mod tests {
         assert!(parsed.is_ok());
         let push = parsed.unwrap();
         assert!(push.refs == "refs/heads/master");
-        assert!(redirects_updated(&push));
-    }
-
-    #[test]
-    fn sha1_hash() {
-        // Note: use a securely generated, random secret in production
-        let secret = "hello".to_string();
-        // an actual payload is the full JSON sent in the request
-        let payload = "this is an example payload of what we want to sign.".to_string();
-        assert_eq!(
-            generate_github_hash(&secret, &payload),
-            "sha1=604b8100cfe1aeaee448759c1450f080f41d41db"
-        );
+        assert!(push.file_modified("redirects.toml"));
     }
 }

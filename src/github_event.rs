@@ -13,25 +13,25 @@ use std::io::Read;
 /// Represents a Github user that is passed in by the Github webhook API
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq, Serialize)]
 pub struct GithubUserShort {
-    name: String,
-    email: String,
-    username: String,
+    pub name: String,
+    pub email: String,
+    pub username: String,
 }
 
 /// Represents a Github commit that is passed in by the Github webhook API
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Commit {
-    id: String,
-    tree_id: String,
-    distinct: bool,
-    message: String,
-    timestamp: String,
-    url: String,
-    author: GithubUserShort,
-    committer: GithubUserShort,
-    added: Vec<String>,
-    removed: Vec<String>,
-    modified: Vec<String>,
+    pub id: String,
+    pub tree_id: String,
+    pub distinct: bool,
+    pub message: String,
+    pub timestamp: String,
+    pub url: String,
+    pub author: GithubUserShort,
+    pub committer: GithubUserShort,
+    pub added: Vec<String>,
+    pub removed: Vec<String>,
+    pub modified: Vec<String>,
 }
 
 /// Represents a PushEvent that is passed in by the Github webhook API
@@ -105,4 +105,21 @@ pub fn generate_github_hash(secret: &str, json_str: &str) -> String {
     // hmac produces result as bytes. convert it to a hex string representation
     hash.extend(hmac_result.as_slice().iter().map(|x| format!("{:02x}", x)));
     hash
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn sha1_hash() {
+        // Note: use a securely generated, random secret in production
+        let secret = "hello".to_string();
+        // an actual payload is the full JSON sent in the request
+        let payload = "this is an example payload of what we want to sign.".to_string();
+        assert_eq!(
+            generate_github_hash(&secret, &payload),
+            "sha1=604b8100cfe1aeaee448759c1450f080f41d41db"
+        );
+    }
 }

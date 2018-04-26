@@ -56,7 +56,7 @@ url = "https://serde.rs"
 
 [[redirect]]
 short = "std"
-url = "https://doc.rust-lang.org/std"
+url = "https://doc.rust-lang.org/stable/std"
 
 [[redirect]]
 short = "toolstate"

@@ -3,12 +3,12 @@
 {% block content %}
     <p>This (unofficial) site is meant as a shorthand for navigating to <a href="https://www.rust-lang.org">Rust</a> documentation by use of subdomain redirects.</p>
     <p>Link broken, or want another redirect? Make a pull request <a href="https://github.com/nocduro/rustref">here</a>.</p>
-    <h2 id="link-to-official-documentation">Link to official documentation:</h2>
+    <h2>Link to official documentation:</h2>
     <p><a href="https://doc.rust-lang.org/">https://doc.rust-lang.org/</a></p>
     <h2 id="current-redirects">Current redirects:</h2>
 
-    {% for short, url in redirects %}
-        {{short}}.rustref.com → <a href={{url}}>{{url}}</a><br />
+    {% for short, url in map %}
+        {{short}}.rustref.com → <a href={{url}}>{{url}}</a><br/>
     {% endfor %}
 
 {% endblock content %}

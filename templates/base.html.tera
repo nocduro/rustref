@@ -6,30 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <style>
         body {
-            font-family: Montserrat, helvetica, arial, sans-serif; 
-            font-size: 16px;
+            font-family: helvetica, arial, sans-serif; 
+            font-size: 1.2em;
             color: #444444;
             margin: 0;
         }
         h2 {
+            font-family: Montserrat, helvetica, arial, sans-serif; 
             font-weight: 700;
-            font-size: 1.6em;
+            font-size: 1.4em;
             margin-top: 20px;
         }
         p {
-            line-height: 1.6em;
+            line-height: 1.2em;
         }
         .container {
-            max-width: 650px;
+            max-width: 700px;
             margin: 10px auto 10px auto;
             padding-left: 15px;
             padding-right: 15px
         }
         .header {
+            font-family: Montserrat, helvetica, arial, sans-serif; 
             background-color: rgb(196, 60, 60);
             color: #FFFFFF;
             padding: 10px 0 10px 0;
-            font-size: 1.6em;
+            font-size: 1.2em;
         }
     </style>
 </head>

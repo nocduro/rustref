@@ -70,12 +70,13 @@ pub fn update_redirect_map(redirs: State<RedirectMap>, cf: State<CloudflareApi>)
     }
 
     // clear Cloudflare's cache
+    cloudflare::zones::purge::purge_everything(&cf_api, &zone_id)?;
 
     // update the map, then unlock asap
     {
-        let mut redir_map = redirs.write()?;
+        let redir_map = &mut redirs.write()?.map;
         *redir_map = vec_redirects_to_hashmap(&new_redirects);
-        println!("map: {:#?}", *redir_map);
+        println!("map: {:#?}", &redir_map);
     }
 
     // TODO: overwrite "redirects.toml" so next server restart we get the latest config from file

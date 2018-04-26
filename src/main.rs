@@ -25,8 +25,15 @@ mod redirect_utils;
 
 pub use errors::{Error, Result};
 
-type RedirectMap = RwLock<HashMap<String, String>>;
+type RedirectMap = RwLock<RedirectData>;
 type CloudflareApi = Mutex<Cloudflare>;
+
+#[derive(Debug, Serialize)]
+pub struct RedirectData {
+    map: HashMap<String, String>,
+    commit_hash: String,
+    commit_url: String,
+}
 
 /// Represents a Github user that is passed in by the Github webhook API
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq)]
@@ -104,22 +111,13 @@ fn webhook(
     redirect_utils::update_redirect_map(redirs, cf).map(|_| Ok("Redirects Updated!\n"))?
 }
 
-#[derive(Debug, Serialize)]
-struct IndexTemplateVars<'a> {
-    redirects: &'a HashMap<String, String>,
-    commit: String,
-}
-
 /// Return a page listing all current redirects in alphabetic order
 #[get("/")]
 fn index(redirs: State<RedirectMap>) -> Template {
-    let redirs = redirs.read().expect("rlock failed");
+    let data: &RedirectData = &*redirs.read().expect("rlock failed");
     Template::render(
         "index",
-        IndexTemplateVars {
-            redirects: &*redirs,
-            commit: "commit_hash".to_string(),
-        },
+        data,
     )
 }
 
@@ -129,7 +127,7 @@ fn index(redirs: State<RedirectMap>) -> Template {
 /// Example: cook.rustref.com => https://doc.rust-lang.org/cargo/
 #[get("/redirect/<key>")]
 fn redirect_bare(key: String, redirs: State<RedirectMap>) -> Option<Redirect> {
-    let map = redirs.read().expect("could not lock rlock");
+    let map: &HashMap<String, String> = &redirs.read().expect("could not lock rlock").map;
     match map.get(&key) {
         Some(url) => Some(Redirect::found(url)),
         None => None,
@@ -143,7 +141,7 @@ fn redirect_bare(key: String, redirs: State<RedirectMap>) -> Option<Redirect> {
 ///     https://doc.rust-lang.org/stable/rust-by-example/primitives.html
 #[get("/redirect/<key>/<path>")]
 fn redirect(key: String, path: &RawStr, redirs: State<RedirectMap>) -> Option<Redirect> {
-    let map = redirs.read().expect("could not lock rlock");
+    let map = &redirs.read().expect("could not lock rlock").map;
     match map.get(&key) {
         Some(url) => Some(Redirect::found(&format!("{}/{}", url, path))),
         None => None,
@@ -153,6 +151,8 @@ fn redirect(key: String, path: &RawStr, redirs: State<RedirectMap>) -> Option<Re
 fn rocket() -> rocket::Rocket {
     let redirects = redirect_utils::redirects_from_file("redirects.toml")
         .expect("error reading redirects from file");
+
+    let redirect_data = RedirectData{map: redirects, commit_hash: ".toml".into(), commit_url: "".into()};
 
     let cf_api_key: String = dotenv::var("cloudflare_key").expect("no cloudflare key found!");
     let cf_email: String = dotenv::var("cloudflare_email").expect("no cloudflare email found!");
@@ -164,7 +164,7 @@ fn rocket() -> rocket::Rocket {
 
     rocket::ignite()
         .mount("/", routes![index, redirect, redirect_bare, webhook])
-        .manage(RwLock::new(redirects))
+        .manage(RwLock::new(redirect_data))
         .manage(Mutex::new(cf_api))
         .attach(Template::fairing())
 }

@@ -43,6 +43,10 @@ short = "ffi"
 url = "http://jakegoulding.com/rust-ffi-omnibus"
 
 [[redirect]]
+short = "learning"
+url = "https://github.com/ctjhoa/rust-learning"
+
+[[redirect]]
 short = "nomicon"
 url = "https://doc.rust-lang.org/nomicon"
 

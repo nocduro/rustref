@@ -3,6 +3,10 @@ short = "api"
 url = "https://rust-lang-nursery.github.io/api-guidelines/"
 
 [[redirect]]
+short = "awesome"
+url = "https://github.com/rust-unofficial/awesome-rust"
+
+[[redirect]]
 short = "book"
 url = "https://doc.rust-lang.org/stable/book/second-edition/"
 
@@ -43,16 +47,16 @@ short = "nomicon"
 url = "https://doc.rust-lang.org/nomicon"
 
 [[redirect]]
+short = "patterns"
+url = "https://github.com/rust-unofficial/patterns"
+
+[[redirect]]
 short = "rfc"
 url = "https://rust-lang.github.io/rfcs"
 
 [[redirect]]
 short = "rustc"
 url = "https://rust-lang-nursery.github.io/rustc-guide/"
-
-[[redirect]]
-short = "serde"
-url = "https://serde.rs"
 
 [[redirect]]
 short = "std"

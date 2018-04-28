@@ -67,6 +67,10 @@ short = "std"
 url = "https://doc.rust-lang.org/stable/std"
 
 [[redirect]]
+short = "nightly"
+url = "https://doc.rust-lang.org/nightly/std"
+
+[[redirect]]
 short = "toolstate"
 url = "https://rust-lang-nursery.github.io/rust-toolstate/"
 

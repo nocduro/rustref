@@ -47,6 +47,14 @@ short = "learning"
 url = "https://github.com/ctjhoa/rust-learning"
 
 [[redirect]]
+short = "macrobook"
+url = "https://danielkeep.github.io/tlborm/book/README.html"
+
+[[redirect]]
+short = "nightly"
+url = "https://doc.rust-lang.org/nightly/std"
+
+[[redirect]]
 short = "nomicon"
 url = "https://doc.rust-lang.org/nomicon"
 
@@ -67,13 +75,13 @@ short = "std"
 url = "https://doc.rust-lang.org/stable/std"
 
 [[redirect]]
-short = "nightly"
-url = "https://doc.rust-lang.org/nightly/std"
-
-[[redirect]]
 short = "toolstate"
 url = "https://rust-lang-nursery.github.io/rust-toolstate/"
 
 [[redirect]]
 short = "unstable"
 url = "https://doc.rust-lang.org/nightly/unstable-book"
+
+[[redirect]]
+short = "wasm"
+url = "https://rust-lang-nursery.github.io/rust-wasm/introduction.html"

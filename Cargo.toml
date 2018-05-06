@@ -12,13 +12,13 @@ toml = "0.4"
 lazy_static = "1.0"
 rayon = "1.0"
 reqwest = "0.8"
-rocket = "0.3.8"
-rocket_codegen = "0.3.8"
+rocket = "0.3.10"
+rocket_codegen = "0.3.10"
 hmac = "0.6"
 sha-1 = "0.7.0"
 cloudflare = { git = "https://github.com/nocduro/cloudflare-rs" }
 
 [dependencies.rocket_contrib]
-version = "0.3.8"
+version = "0.3.10"
 default-features = true
 features = ["tera_templates"]

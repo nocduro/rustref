@@ -63,6 +63,10 @@ short = "patterns"
 url = "https://github.com/rust-unofficial/patterns"
 
 [[redirect]]
+short = "ref"
+url = "https://doc.rust-lang.org/reference/index.html"
+
+[[redirect]]
 short = "rfc"
 url = "https://rust-lang.github.io/rfcs"
 

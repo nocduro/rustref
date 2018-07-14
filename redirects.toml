@@ -88,4 +88,4 @@ url = "https://doc.rust-lang.org/nightly/unstable-book"
 
 [[redirect]]
 short = "wasm"
-url = "https://rust-lang-nursery.github.io/rust-wasm/introduction.html"
+url = "https://rustwasm.github.io/book/"
